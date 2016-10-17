@@ -20,8 +20,19 @@
       <ion-label floating>Password</ion-label>
       <ion-input [(ngModel)]="usercreds.password" type="password"></ion-input>
     </ion-item>
+    <ion-item>
+    <ion-label>LogIn As</ion-label>
+      <ion-select [(ngModel)]="logInAs">
+        <ion-option value="employee">Employee</ion-option>
+        <ion-option value="company">Company</ion-option>
+      </ion-select>
+    </ion-item>
     <div padding>
-      <button block (click)="login(usercreds)">Login</button>
+      <button ion-button block (click)="login(usercreds)">Login</button>
+    </div>
+    <div padding>
+      <button ion-button item-left clear (click)="forgotPassWord()">Forgot Pass?</button>
+      <button ion-button clear (click)="signUp()" style="float:right">SignUp</button>
     </div>
   </ion-list>
 </ion-content>
