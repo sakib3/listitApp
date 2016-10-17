@@ -6,6 +6,7 @@ import { StatusBar } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Login', component: LoginPage }
+      { title: 'Login', component: LoginPage },
+      { title: 'Forgot Password', component: ForgotPasswordPage }
     ];
   }
 

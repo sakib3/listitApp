@@ -19,7 +19,7 @@ export class LoginPage {
   signUp(){
 
   }
-  forgotPassWord(){
+  forgotPassword(){
 
   }
 
