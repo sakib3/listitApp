@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
+import { SignUpPage } from '../pages/signUp/signUp';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
     MyApp,
     HomePage,
     LoginPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    SignUpPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -21,7 +23,8 @@ import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
     MyApp,
     HomePage,
     LoginPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    SignUpPage
   ],
   providers: []
 })

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <ion-icon color="primary" name="rose"></ion-icon>
+      <span color="danger" class="home-title">ListIt</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list inset>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [(ngModel)]="usercreds.email" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input [(ngModel)]="usercreds.password" type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Confirm Password</ion-label>
+      <ion-input [(ngModel)]="usercreds.confirmPassword" type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label>LogIn As</ion-label>
+      <ion-select [(ngModel)]="logInAs">
+        <ion-option value="employee">Employee</ion-option>
+        <ion-option value="company">Company</ion-option>
+      </ion-select>
+    </ion-item>
+    <div padding>
+      <button ion-button block (click)="signUp(usercreds)">SignUp</button>
+    </div>
+  </ion-list>
+</ion-content>
