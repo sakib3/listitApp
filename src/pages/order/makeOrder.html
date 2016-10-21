@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <ion-icon color="primary" name="rose"></ion-icon>
+      <span color="danger" class="home-title">ListIt</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>Company Name</ion-label>
+      <ion-select (ionChange)="companySelected($event)">
+        <ion-option *ngFor="let company of companies" value="{{company.id}}">{{company.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Work Place</ion-label>
+      <ion-select>
+        <ion-option *ngFor="let workplace of selectedCompany.workplaces" value="{{workplace.w_id}}">{{workplace.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+    <ion-card>
+      <ion-card-header>
+      Add Products
+      </ion-card-header>
+      <ion-list>
+        <span ion-item>
+        <ion-badge item-left>3</ion-badge>
+        Toilet Cleaners
+        <button ion-button outline item-right color="secondary">
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <button ion-button outline item-right color="danger">
+          <ion-icon name="remove"></ion-icon>
+        </button>
+        </span>
+
+        <span ion-item>
+        <ion-icon name="medical" item-left></ion-icon>
+        Hospital
+        </span>
+
+        <span ion-item>
+        <ion-icon name="cafe" item-left></ion-icon>
+        Cafe
+        </span>
+
+        <span ion-item>
+        <ion-icon name="paw" item-left></ion-icon>
+        Dog Park
+        </span>
+
+        <span ion-item>
+        <ion-icon name="beer" item-left></ion-icon>
+        Pub
+        </span>
+
+        <span ion-item>
+        <ion-icon name="planet" item-left></ion-icon>
+        Space
+        </span>
+      </ion-list>
+    </ion-card>
+
+    <div padding>
+      <button ion-button block (click)="send()">Send</button>
+    </div>
+
+</ion-content>

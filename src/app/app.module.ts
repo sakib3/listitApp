@@ -5,7 +5,9 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
 import { SignUpPage } from '../pages/signUp/signUp';
-
+import { OrderPage } from '../pages/order/order';
+import { MakeOrderPage } from '../pages/order/makeOrder';
+import { ViewOrderPage } from '../pages/order/viewOrder';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,10 @@ import { SignUpPage } from '../pages/signUp/signUp';
     HomePage,
     LoginPage,
     ForgotPasswordPage,
-    SignUpPage
+    SignUpPage,
+    OrderPage,
+    MakeOrderPage,
+    ViewOrderPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -24,7 +29,10 @@ import { SignUpPage } from '../pages/signUp/signUp';
     HomePage,
     LoginPage,
     ForgotPasswordPage,
-    SignUpPage
+    SignUpPage,
+    OrderPage,
+    MakeOrderPage,
+    ViewOrderPage
   ],
   providers: []
 })
