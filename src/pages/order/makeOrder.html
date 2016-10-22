@@ -29,40 +29,15 @@
       Add Products
       </ion-card-header>
       <ion-list>
-        <span ion-item>
+        <span ion-item *ngFor="let product of products">
         <ion-badge item-left>3</ion-badge>
-        Toilet Cleaners
+        {{product.name}}
         <button ion-button outline item-right color="secondary">
           <ion-icon name="add"></ion-icon>
         </button>
         <button ion-button outline item-right color="danger">
           <ion-icon name="remove"></ion-icon>
         </button>
-        </span>
-
-        <span ion-item>
-        <ion-icon name="medical" item-left></ion-icon>
-        Hospital
-        </span>
-
-        <span ion-item>
-        <ion-icon name="cafe" item-left></ion-icon>
-        Cafe
-        </span>
-
-        <span ion-item>
-        <ion-icon name="paw" item-left></ion-icon>
-        Dog Park
-        </span>
-
-        <span ion-item>
-        <ion-icon name="beer" item-left></ion-icon>
-        Pub
-        </span>
-
-        <span ion-item>
-        <ion-icon name="planet" item-left></ion-icon>
-        Space
         </span>
       </ion-list>
     </ion-card>
