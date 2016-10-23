@@ -16,24 +16,36 @@ export class MakeOrderPage implements OnInit{
   selectedCompany: Company;
 
   constructor(public navCtrl: NavController, private companyService: CompanyService, private productService: ProductService) {
-    //this.getCompanies();
     this.selectedCompany = new Company();
   }
   getCompanies(): void {
-    //this.companies = this.companyService.getCompanies();
     this.companyService.getCompanies().then(companies => this.companies = companies);
   }
   getProducts(): void {
-    //this.companies = this.companyService.getCompanies();
     this.productService.getProducts().then(products => this.products = products);
   }
   ngOnInit(): void {
     console.info('On init!!!!')
     this.getCompanies();
     this.getProducts();
-    console.log(this.products);
   }
   companySelected(id) : void{
     if(id!==undefined) this.selectedCompany = this.companies.find(c=>c.id==id);
+  }
+  prodQuantityInc(id) : void{
+    this.products = this.products.map((p)=>
+                  {
+                    if(p.id == id)
+                      p.quantity++;
+                    return p;
+                  });
+  }
+  prodQuantityDsc(id) : void{
+    this.products = this.products.map((p)=>
+                  {
+                    if(p.id == id && p.quantity > 0)
+                      p.quantity--;
+                    return p;
+                  });
   }
 }
