@@ -10,7 +10,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <p>
-    Hio
-  </p>
+  <ion-item>
+    <ion-label>Pending Orders</ion-label>
+  </ion-item>
+  <ion-card *ngFor="let order of orders">
+  <ion-item>
+    <span item-left><ion-icon color="danger" name="time"></ion-icon>&nbsp;{{order.order_date}}</span>
+    <button ion-button item-right clear color="danger" (click)="detailsOrder(order.id)">Details</button>
+  </ion-item>
+  </ion-card>
 </ion-content>
