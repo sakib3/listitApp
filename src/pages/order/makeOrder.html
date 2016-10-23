@@ -30,12 +30,12 @@
       </ion-card-header>
       <ion-list>
         <span ion-item *ngFor="let product of products">
-        <ion-badge item-left>3</ion-badge>
+        <ion-badge item-left>{{product.quantity}}</ion-badge>
         {{product.name}}
-        <button ion-button outline item-right color="secondary">
+        <button ion-button outline item-right color="secondary" (click)="prodQuantityInc(product.id)">
           <ion-icon name="add"></ion-icon>
         </button>
-        <button ion-button outline item-right color="danger">
+        <button ion-button outline item-right color="danger" (click)="prodQuantityDsc(product.id)">
           <ion-icon name="remove"></ion-icon>
         </button>
         </span>
