@@ -8,6 +8,7 @@ import { SignUpPage } from '../pages/signUp/signUp';
 import { OrderPage } from '../pages/order/order';
 import { MakeOrderPage } from '../pages/order/makeOrder';
 import { ViewOrderPage } from '../pages/order/viewOrder';
+import { OrderDetailPage } from '../pages/order/order-detail';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ViewOrderPage } from '../pages/order/viewOrder';
     SignUpPage,
     OrderPage,
     MakeOrderPage,
-    ViewOrderPage
+    ViewOrderPage,
+    OrderDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -32,7 +34,8 @@ import { ViewOrderPage } from '../pages/order/viewOrder';
     SignUpPage,
     OrderPage,
     MakeOrderPage,
-    ViewOrderPage
+    ViewOrderPage,
+    OrderDetailPage
   ],
   providers: []
 })

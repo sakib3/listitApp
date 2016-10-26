@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { OrderService } from './orderService';
 import { Order } from './orderModel';
 import { ORDERS, ORDER } from './mock-orders';
+import { OrderDetailPage } from './order-detail';
 @Component({
   selector: 'page-viewOrder',
   templateUrl: 'viewOrder.html',
@@ -22,5 +23,8 @@ export class ViewOrderPage implements OnInit{
   }
   detailsOrder(id): void{
     console.log('Order details for id ',id);
+    this.navCtrl.push(OrderDetailPage, {
+      'id': id
+    });
   }
 }

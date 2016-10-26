@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <ion-icon color="primary" name="rose"></ion-icon>
+      <span color="danger" class="home-title">ListIt</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="order">
+    <ion-card-header>Order Detail</ion-card-header>
+
+    <ion-item>
+    <ion-icon name="umbrella" item-left large></ion-icon>
+    <h2>Company Name : {{order.company}}</h2>
+    <p>Date&nbsp;{{order.order_date}}</p>
+    </ion-item>
+    <ion-list>
+      <ion-list-header>
+        Products
+      </ion-list-header>
+      <ion-item *ngFor="let product of order.products">
+        <ion-badge item-left>{{product.quantity}}</ion-badge>
+        {{product.name}}
+      </ion-item>
+    </ion-list>
+    <ion-item>
+    <span item-left>
+      <ion-icon name="time" small></ion-icon>
+      Delivery&nbsp;{{order.delivery_date}}
+    </span >
+    <span item-right>
+      <ion-icon name="radio-button-on" color="danger"small></ion-icon>
+    </span >
+    </ion-item>
+
+  </ion-card>
+</ion-content>
