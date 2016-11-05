@@ -1,21 +1,34 @@
 import { Component } from '@angular/core';
-
+import {LocalStorageService} from '../providers/local-storage-service';
+import { Toast } from 'ionic-native';
+import { OrderPage } from '../../pages/order/order';
+import {IonicApp, Nav} from 'ionic-angular';
+import { UserData } from '../../providers/user-data';
 @Component({
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  providers: [UserData]
 })
 export class LoginPage {
-  usercreds: {email: string, password: string};
-  logInAs: string;
-  constructor() {
-    this.usercreds = {
-        email: '',
-        password: ''
-    }
-    this.logInAs = "employee";
-  }
-  login(usercreds) {
-    console.log('login req', usercreds);
-  }
+  login: {username?: string, password?: string} = {};
+  submitted = false;
+
+ constructor(public navCtrl: Nav, public userData: UserData) { }
+
+ onLogin(form) {
+   //this.storeService.add(usercreds.email, usercreds.password)
+    //   .then((response) => {}, ()=> {});
+   this.submitted = true;
+   console.log(this.login.username)
+   if (form.valid) {
+     this.userData.login(this.login.username);
+     this.navCtrl.push(OrderPage);
+   }
+ }
+
+ onSignup() {
+   //this.navCtrl.push(SignupPage);
+ }
+
   signUp(){
 
   }

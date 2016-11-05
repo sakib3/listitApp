@@ -9,7 +9,8 @@ import { OrderPage } from '../pages/order/order';
 import { MakeOrderPage } from '../pages/order/makeOrder';
 import { ViewOrderPage } from '../pages/order/viewOrder';
 import { OrderDetailPage } from '../pages/order/order-detail';
-
+import { Storage } from '@ionic/storage';
+import { UserData } from '../providers/user-data';
 @NgModule({
   declarations: [
     MyApp,
@@ -37,6 +38,6 @@ import { OrderDetailPage } from '../pages/order/order-detail';
     ViewOrderPage,
     OrderDetailPage
   ],
-  providers: []
+  providers: [UserData, Storage]
 })
 export class AppModule {}

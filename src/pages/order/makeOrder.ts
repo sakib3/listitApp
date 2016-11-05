@@ -48,4 +48,7 @@ export class MakeOrderPage implements OnInit{
                     return p;
                   });
   }
+  send() : void{
+
+  }
 }

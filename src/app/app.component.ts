@@ -9,11 +9,12 @@ import { LoginPage } from '../pages/login/login';
 import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
 import { SignUpPage } from '../pages/signUp/signUp';
 import { OrderPage } from '../pages/order/order';
-
+import {LocalStorageService} from '../pages/providers/local-storage-service';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [LocalStorageService]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -24,16 +25,17 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
-    public menu: MenuController
+    public menu: MenuController,
+    //public storeService :LocalStorageService
   ) {
     this.initializeApp();
 
     // set our app's pages
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Login', component: LoginPage },
-      { title: 'Forgot Password', component: ForgotPasswordPage },
-      { title: 'SignUp', component: SignUpPage },
+      //{ title: 'Home', component: HomePage },
+      //{ title: 'Login', component: LoginPage },
+      //{ title: 'Forgot Password', component: ForgotPasswordPage },
+      //{ title: 'SignUp', component: SignUpPage },
       { title: 'OrderPage', component: OrderPage }
     ];
   }
@@ -43,6 +45,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+      //this.storeService.get().then((data) => { console.log(data)});
     });
   }
 
