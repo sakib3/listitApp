@@ -1,22 +1,26 @@
 <ion-header>
-  <ion-navbar>
-    <button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      <ion-icon color="primary" name="rose"></ion-icon>
-      <span color="danger" class="home-title">ListIt</span>
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>
+            <ion-icon color="primary" name="rose"></ion-icon>
+            <span color="danger" class="home-title">ListIt</span>
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-
-  <h3>Welcome to ListIt!</h3>
-
-  <p>
-    This user friendly app helps you to get a reliable solution for your business.
-  </p>
-
+    <div class="top-20-per-m center-content">
+      <div class="logo">
+          <img src="assets/img/appicon.png">
+      </div>
+      <p>Create your <b>List</b> here</p>
+    </div>
+    <ion-row responsive-sm>
+        <ion-col>
+            <button ion-button (click)="navigateLogin()" color="primary" block>Login</button>
+        </ion-col>
+        <ion-col>
+            <button ion-button (click)="navigateSignup()" color="secondary" block>Signup</button>
+        </ion-col>
+    </ion-row>
 </ion-content>
