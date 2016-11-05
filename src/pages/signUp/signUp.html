@@ -11,28 +11,43 @@
 </ion-header>
 
 <ion-content>
-  <ion-list inset>
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input [(ngModel)]="usercreds.email" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input [(ngModel)]="usercreds.password" type="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Confirm Password</ion-label>
-      <ion-input [(ngModel)]="usercreds.confirmPassword" type="password"></ion-input>
-    </ion-item>
-    <ion-item>
-    <ion-label>LogIn As</ion-label>
-      <ion-select [(ngModel)]="logInAs">
-        <ion-option value="employee">Employee</ion-option>
-        <ion-option value="company">Company</ion-option>
-      </ion-select>
-    </ion-item>
-    <div padding>
-      <button ion-button block (click)="signUp(usercreds)">SignUp</button>
-    </div>
+  <ion-list>
+
+    <form #SignUpForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label floating color="primary">Username</ion-label>
+        <ion-input [(ngModel)]="signin.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="username.valid || submitted == false" color="danger" padding-left>
+        Username is required
+      </p>
+
+      <ion-item>
+        <ion-label floating color="primary">Password</ion-label>
+        <ion-input [(ngModel)]="signin.password" name="password" type="password" #password="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="password.valid || submitted == false" color="danger" padding-left>
+        Password is required
+      </p>
+
+      <ion-item>
+        <ion-label floating color="primary">Confirm Password</ion-label>
+        <ion-input [(ngModel)]="signin.confirmPassword" name="confirmPassword" type="password" #confirmPassword="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="confirmPassword.valid || submitted == false" color="danger" padding-left>
+        Confirm Password is required
+      </p>
+      <p [hidden]="!passwordMissmatch" color="danger" padding-left>
+        Password missmatch
+      </p>
+      <ion-row responsive-sm>
+        <ion-col>
+          <button ion-button (click)="onSignUp(SignUpForm)" type="submit" color="primary" block>SignIn</button>
+        </ion-col>
+      </ion-row>
+    </form>
   </ion-list>
 </ion-content>

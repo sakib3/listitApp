@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar hideBackButton="true">
         <ion-title>
             <ion-icon color="primary" name="rose"></ion-icon>
             <span color="danger" class="home-title">ListIt</span>
@@ -17,10 +17,10 @@
     </div>
     <ion-row responsive-sm>
         <ion-col>
-            <button ion-button (click)="navigateLogin()" color="primary" block>Login</button>
+            <button ion-button (click)="navigateSignIn()" color="primary" block>SignIn</button>
         </ion-col>
         <ion-col>
-            <button ion-button (click)="navigateSignup()" color="secondary" block>Signup</button>
+            <button ion-button (click)="navigateSignUp()" color="secondary" block>SignUp</button>
         </ion-col>
     </ion-row>
 </ion-content>

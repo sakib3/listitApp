@@ -5,7 +5,7 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
+import { SignInPage } from '../pages/signin/signin';
 import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
 import { SignUpPage } from '../pages/signUp/signUp';
 import { OrderPage } from '../pages/order/order';
@@ -33,7 +33,7 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       //{ title: 'Home', component: HomePage },
-      //{ title: 'Login', component: LoginPage },
+      //{ title: 'Login', component: SignInPage },
       //{ title: 'Forgot Password', component: ForgotPasswordPage },
       //{ title: 'SignUp', component: SignUpPage },
       { title: 'OrderPage', component: OrderPage }

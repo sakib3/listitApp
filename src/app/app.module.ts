@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
+import { SignInPage } from '../pages/signin/signin';
 import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
 import { SignUpPage } from '../pages/signUp/signUp';
 import { OrderPage } from '../pages/order/order';
@@ -15,7 +15,7 @@ import { UserData } from '../providers/user-data';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage,
+    SignInPage,
     ForgotPasswordPage,
     SignUpPage,
     OrderPage,
@@ -30,7 +30,7 @@ import { UserData } from '../providers/user-data';
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage,
+    SignInPage,
     ForgotPasswordPage,
     SignUpPage,
     OrderPage,

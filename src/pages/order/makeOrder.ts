@@ -4,6 +4,7 @@ import { Company } from './companyModel';
 import { Product } from './productModel';
 import { CompanyService } from './companyService';
 import { ProductService } from './productService';
+import { HomePage } from '../../pages/home/home';
 
 @Component({
   selector: 'page-makeOrder',
@@ -50,5 +51,9 @@ export class MakeOrderPage implements OnInit{
   }
   send() : void{
 
+  }
+
+  logout() : void{
+    this.navCtrl.push(HomePage);
   }
 }
