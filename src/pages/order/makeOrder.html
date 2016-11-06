@@ -1,53 +1,57 @@
 <ion-header>
-  <ion-navbar>
-    <button menuToggle>
+    <ion-navbar>
+        <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      <ion-icon color="primary" name="rose"></ion-icon>
-      <span color="danger" class="home-title">ListIt</span>
-    </ion-title>
-    <button ion-button clear style="float:right" color="danger" (click)="logout()">
+        <ion-title>
+            <ion-icon color="primary" name="rose"></ion-icon>
+            <span color="danger" class="home-title">ListIt</span>
+        </ion-title>
+        <button ion-button clear style="float:right" color="danger" (click)="logout()">
       <ion-icon name="log-out"></ion-icon>
       &nbsp;Logout
     </button>
-  </ion-navbar>
+    </ion-navbar>
 </ion-header>
+
 <ion-content>
-  <ion-list inset>
-    <ion-item>
-      <ion-label>Company Name</ion-label>
-      <ion-select (ionChange)="companySelected($event)">
-        <ion-option *ngFor="let company of companies" value="{{company.id}}">{{company.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Work Place</ion-label>
-      <ion-select>
-        <ion-option *ngFor="let workplace of selectedCompany.workplaces" value="{{workplace.w_id}}">{{workplace.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+    <ion-list inset>
+        <ion-item>
+            <ion-label>Company Name</ion-label>
+            <ion-select (ionChange)="companySelected($event)">
+                <ion-option *ngFor="let company of companies" value="{{company.id}}">{{company.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Work Place</ion-label>
+            <ion-select>
+                <ion-option *ngFor="let workplace of selectedCompany.workplaces" value="{{workplace.w_id}}">{{workplace.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
     <ion-card>
-      <ion-card-header>
-      Add Products
-      </ion-card-header>
-      <ion-list>
-        <span ion-item *ngFor="let product of products">
-        <ion-badge item-left>{{product.quantity}}</ion-badge>
-        {{product.name}}
-        <button ion-button outline item-right color="secondary" (click)="prodQuantityInc(product.id)">
-          <ion-icon name="add"></ion-icon>
-        </button>
-        <button ion-button outline item-right color="danger" (click)="prodQuantityDsc(product.id)">
-          <ion-icon name="remove"></ion-icon>
-        </button>
-        </span>
-      </ion-list>
+        <ion-item>
+          <ion-icon item-left large name="camera" color="primary"></ion-icon>
+          <ion-input [(ngModel)]="addProduct.name" name="name" type="text" #name="ngModel" spellcheck="false" autocapitalize="off" placeholder="Add your item" clearInput required>
+          </ion-input>
+          <button ion-button item-right round outline (click)="addNew()"><ion-icon name="add"></ion-icon> Add</button>
+        </ion-item>
+        <ion-list>
+          <span ion-item *ngFor="let product of products">
+          <ion-badge item-left>{{product.quantity}}</ion-badge>
+          {{product.name}}
+          <button ion-button outline item-right color="secondary" (click)="prodQuantityInc(product.id)">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          <button ion-button outline item-right color="danger" (click)="prodQuantityDsc(product.id)">
+            <ion-icon name="remove"></ion-icon>
+          </button>
+          </span>
+        </ion-list>
     </ion-card>
 
     <div padding>
-      <button ion-button block (click)="send()">Send</button>
+        <button ion-button block (click)="send()">Order Now</button>
     </div>
 
 </ion-content>

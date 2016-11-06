@@ -15,9 +15,10 @@ export class MakeOrderPage implements OnInit{
   companies: Company[];
   products: Product[];
   selectedCompany: Company;
-
+  addProduct: any;
   constructor(public navCtrl: NavController, private companyService: CompanyService, private productService: ProductService) {
     this.selectedCompany = new Company();
+    this.addProduct = {};
   }
   getCompanies(): void {
     this.companyService.getCompanies().then(companies => this.companies = companies);
@@ -55,5 +56,11 @@ export class MakeOrderPage implements OnInit{
 
   logout() : void{
     this.navCtrl.push(HomePage);
+  }
+  addNew() :void{
+    if(this.addProduct.name !== undefined){
+      this.products.push({id: new Date().getTime(), name:this.addProduct.name, family:'Custom',quantity: 0});
+      this.addProduct = {};
+    }
   }
 }
