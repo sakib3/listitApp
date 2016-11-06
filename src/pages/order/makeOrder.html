@@ -36,7 +36,7 @@
           </ion-input>
           <button ion-button item-right round outline (click)="addNew()"><ion-icon name="add"></ion-icon> Add</button>
         </ion-item>
-        <ion-list>
+        <ion-list style="height: 11em;overflow-y: auto; margin-bottom: 2em;">
           <span ion-item *ngFor="let product of products">
           <ion-badge item-left>{{product.quantity}}</ion-badge>
           {{product.name}}
