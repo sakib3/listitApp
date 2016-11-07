@@ -12,7 +12,6 @@ import { OrderDetailPage } from './order-detail';
 export class ViewOrderPage implements OnInit{
   orders: Order[];
   constructor(public navCtrl: NavController,private orderService: OrderService) {
-
   }
   ngOnInit(): void {
     console.info('On init!!!!')
@@ -26,5 +25,8 @@ export class ViewOrderPage implements OnInit{
     this.navCtrl.push(OrderDetailPage, {
       'id': id
     });
+  }
+  openNavDetailsPage(item) {
+    //this.navCtrl.push(NavigationDetailsPage, { item: item });
   }
 }

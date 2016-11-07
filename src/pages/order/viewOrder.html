@@ -15,12 +15,20 @@
 </ion-header>
 <ion-content>
   <ion-item>
-    <ion-label>Pending Orders</ion-label>
+    <ion-label>Orders History</ion-label>
   </ion-item>
-  <ion-card *ngFor="let order of orders">
+  <!-- <ion-card *ngFor="let order of orders">
   <ion-item>
     <span item-left><ion-icon color="danger" name="time"></ion-icon>&nbsp;{{order.order_date}}</span>
     <button ion-button item-right clear color="danger" (click)="detailsOrder(order.id)">Details</button>
   </ion-item>
-  </ion-card>
+  </ion-card> -->
+
+  <ion-list>
+    <button ion-item *ngFor="let order of orders" (click)="detailsOrder(order.id)" icon-left>
+      <ion-icon [name]="order.status?'checkmark-circle':'warning'" [color]="order.status?'secondary':'danger'" item-left></ion-icon>
+      {{ order.order_date}}
+      {{ order.company }}
+    </button>
+  </ion-list>
 </ion-content>

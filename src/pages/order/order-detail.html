@@ -19,7 +19,7 @@
     <ion-card-header>Order Detail</ion-card-header>
 
     <ion-item>
-    <ion-icon name="umbrella" item-left large></ion-icon>
+    <ion-icon name="snow" item-left large></ion-icon>
     <h2>Company Name : {{order.company}}</h2>
     <p>Date&nbsp;{{order.order_date}}</p>
     </ion-item>
@@ -38,7 +38,7 @@
       Delivery&nbsp;{{order.delivery_date}}
     </span >
     <span item-right>
-      <ion-icon name="radio-button-on" color="danger"small></ion-icon>
+      <ion-icon name="radio-button-on" [color]="order.status?'secondary':'danger'" small></ion-icon>
     </span >
     </ion-item>
 
