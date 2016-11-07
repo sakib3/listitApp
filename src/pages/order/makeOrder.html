@@ -47,7 +47,7 @@
           <ion-label style="color:white;">Select work place</ion-label>
           <ion-select (ionChange)="companySelected($event)">
               <span *ngFor="let company of companies">
-                <ion-option *ngFor="let workplace of company.workplaces" value="{{company.id}}">{{company.name}} - {{workplace.name}}</ion-option>
+                <ion-option *ngFor="let workplace of company.workplaces" value="{{workplace.w_id}}">{{company.name}} - {{workplace.name}}</ion-option>
               </span>
           </ion-select>
       </ion-item>
