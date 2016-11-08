@@ -12,11 +12,9 @@ export class SignUpPage {
  constructor(public navCtrl: Nav, public userData: UserData) { }
 
   onSignUp(form){
-    console.log('login req', form);
     //this.storeService.add(usercreds.email, usercreds.password)
      //   .then((response) => {}, ()=> {});
     this.submitted = true;
-    console.log(this.signin.password,' === '+this.signin.confirmPassword)
     this.passwordMissmatch = (this.signin.password !== this.signin.confirmPassword) && this.signin.password !== undefined && this.signin.confirmPassword !== undefined;
     if (form.valid && !this.passwordMissmatch) {
 

@@ -14,14 +14,12 @@ export class ViewOrderPage implements OnInit{
   constructor(public navCtrl: NavController,private orderService: OrderService) {
   }
   ngOnInit(): void {
-    console.info('On init!!!!')
     this.getOrders();
   }
   getOrders(): void {
     this.orderService.getOrders().then(orders => this.orders = orders);
   }
   detailsOrder(id): void{
-    console.log('Order details for id ',id);
     this.navCtrl.push(OrderDetailPage, {
       'id': id
     });

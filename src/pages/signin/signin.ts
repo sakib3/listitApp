@@ -12,13 +12,12 @@ export class SignInPage {
   signin: {username?: string, password?: string} = {};
   submitted = false;
 
- constructor(public navCtrl: Nav, public userData: UserData) { }
+ constructor(public navCtrl: Nav, private userData: UserData) { }
 
  onSignIn(form) {
    //this.storeService.add(usercreds.email, usercreds.password)
     //   .then((response) => {}, ()=> {});
    this.submitted = true;
-   console.log(this.signin.username)
    if (form.valid) {
      this.userData.login(this.signin.username);
      this.navCtrl.push(OrderPage);

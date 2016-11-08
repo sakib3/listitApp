@@ -21,7 +21,6 @@ export class OrderDetailPage implements OnInit{
   }
   getOrder(id): void {
     this.orderService.getOrders().then(orders => this.order = orders.find(o=>o.id==id));
-
   }
 
 }
