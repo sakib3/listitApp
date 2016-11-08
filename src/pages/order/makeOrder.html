@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-    <button menuToggle>
+    <button menuToggle ion-button icon-only>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
@@ -45,7 +45,7 @@
 
       <ion-item color="primary" style="	border-radius: 5px">
           <ion-label style="color:white;">Select work place</ion-label>
-          <ion-select (ionChange)="companySelected($event)">
+          <ion-select (ionChange)="workplaceSelected($event)">
               <span *ngFor="let company of companies">
                 <ion-option *ngFor="let workplace of company.workplaces" value="{{workplace.w_id}}">{{company.name}} - {{workplace.name}}</ion-option>
               </span>

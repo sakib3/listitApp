@@ -14,12 +14,12 @@ import { HomePage } from '../../pages/home/home';
 export class MakeOrderPage implements OnInit {
     companies: Company[];
     products: Product[];
-    selectedCompany: Company;
+    selectedWorkplace: any;
     addProduct: any;
     testCheckboxOpen: boolean;
     testCheckboxResult: any;
     constructor(public navCtrl: NavController, private companyService: CompanyService, private productService: ProductService, private alertCtrl: AlertController) {
-        this.selectedCompany = new Company();
+        //this.selectedCompany = new Company();
         this.addProduct = {};
     }
     getCompanies(): void {
@@ -33,8 +33,10 @@ export class MakeOrderPage implements OnInit {
         this.getCompanies();
         this.getProducts();
     }
-    companySelected(id): void {
-        if (id !== undefined) this.selectedCompany = this.companies.find(c => c.id == id);
+    workplaceSelected(id): void {
+        if (id !== undefined)
+          console.log(id);
+        //this.selectedWorkplace = this.companies.map(c => c.workplaces).map(w => w.w_id)this.companies.find(c => c.id == id);
     }
     prodQuantityInc(id): void {
         this.products = this.products.map((p) => {
