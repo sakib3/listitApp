@@ -1,42 +1,46 @@
 <ion-header>
-  <ion-navbar>
-    <button menuToggle>
+    <ion-navbar>
+        <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      <ion-icon color="primary" name="rose"></ion-icon>
-      <span color="danger" class="home-title">ListIt</span>
-    </ion-title>
-  </ion-navbar>
+        <ion-title>
+            <ion-icon color="primary" name="rose"></ion-icon>
+            <span color="danger" class="home-title">ListIt</span>
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
+    <ion-list>
 
-    <form #SignInForm="ngForm" novalidate>
-      <ion-item>
-        <ion-label floating color="primary">Username</ion-label>
-        <ion-input [(ngModel)]="signin.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off" required>
-        </ion-input>
-      </ion-item>
-      <p [hidden]="username.valid || submitted == false" color="danger" padding-left>
-        Username is required
-      </p>
+        <form #SignInForm="ngForm" novalidate>
+            <ion-item>
+                <ion-label floating color="primary">Username</ion-label>
+                <ion-input [(ngModel)]="signin.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off" required>
+                </ion-input>
+            </ion-item>
+            <p [hidden]="username.valid || submitted == false" color="danger" padding-left>
+                Username is required
+            </p>
 
-      <ion-item>
-        <ion-label floating color="primary">Password</ion-label>
-        <ion-input [(ngModel)]="signin.password" name="password" type="password" #password="ngModel" required>
-        </ion-input>
-      </ion-item>
-      <p [hidden]="password.valid || submitted == false" color="danger" padding-left>
-        Password is required
-      </p>
-
-      <ion-row responsive-sm>
-        <ion-col>
-          <button ion-button (click)="onSignIn(SignInForm)" type="submit" color="primary" block>SignIn</button>
-        </ion-col>
-      </ion-row>
-    </form>
-  </ion-list>
+            <ion-item>
+                <ion-label floating color="primary">Password</ion-label>
+                <ion-input [(ngModel)]="signin.password" name="password" type="password" #password="ngModel" required>
+                </ion-input>
+            </ion-item>
+            <p [hidden]="password.valid || submitted == false" color="danger" padding-left>
+                Password is required
+            </p>
+            <ion-row responsive-sm style="margin-top:2em;">
+                <ion-col>
+                    <button ion-button (click)="onForgetPassword()" color="light" block>Forget password</button>
+                </ion-col>
+            </ion-row>
+            <ion-row responsive-sm>
+                <ion-col>
+                    <button ion-button (click)="onSignIn(SignInForm)" type="submit" color="primary" block>SignIn</button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-list>
 </ion-content>

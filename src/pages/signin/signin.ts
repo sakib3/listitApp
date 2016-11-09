@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {LocalStorageService} from '../providers/local-storage-service';
 import { Toast } from 'ionic-native';
 import { OrderPage } from '../../pages/order/order';
+import { ForgotPasswordPage } from '../../pages/forgotPassword/forgotPassword';
 import {IonicApp, Nav} from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 @Component({
@@ -24,8 +25,8 @@ export class SignInPage {
    }
  }
 
-  forgotPassword(){
-
+  onForgetPassword(){
+    this.navCtrl.push(ForgotPasswordPage);
   }
 
 }
