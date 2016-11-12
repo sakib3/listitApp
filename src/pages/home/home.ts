@@ -2,7 +2,7 @@ import { OnInit, Component } from '@angular/core';
 import { Nav } from 'ionic-angular';
 import { SignInPage } from '../../pages/signin/signin';
 import { SignUpPage } from '../../pages/signUp/signUp';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../providers/user-data2';
 import { OrderPage } from '../../pages/order/order';
 
 @Component({
@@ -13,6 +13,7 @@ export class HomePage {
   constructor(private navCtrl:Nav, private userData: UserData) {
     this.userData.hasLoggedIn()
                 .then((isLoggedIn) => {
+                  console.log(isLoggedIn);
                   if(isLoggedIn)
                     this.navigateOrder();
                 }

@@ -5,7 +5,8 @@ import { Product } from './productModel';
 import { CompanyService } from './companyService';
 import { ProductService } from './productService';
 import { HomePage } from '../../pages/home/home';
-import { UserData } from '../../providers/user-data';
+//import { UserData } from '../../providers/user-data';
+import { UserData } from '../../providers/user-data2';
 
 @Component({
     selector: 'page-makeOrder',
@@ -63,9 +64,9 @@ export class MakeOrderPage implements OnInit {
 
     logout(): void {
       this.userData.logout();
-      setTimeout(() => {
-        this.navCtrl.push(HomePage);
-      },0);
+      // setTimeout(() => {
+      //   this.navCtrl.push(HomePage);
+      // },0);
     }
     addNew(): void {
         if (this.addProduct.name !== undefined) {

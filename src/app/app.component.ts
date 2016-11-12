@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Events, Platform, MenuController, Nav } from 'ionic-angular';
 
 import { StatusBar } from 'ionic-native';
 
@@ -9,12 +9,11 @@ import { SignInPage } from '../pages/signin/signin';
 import { ForgotPasswordPage } from '../pages/forgotPassword/forgotPassword';
 import { SignUpPage } from '../pages/signUp/signUp';
 import { OrderPage } from '../pages/order/order';
-import {LocalStorageService} from '../pages/providers/local-storage-service';
+
 
 
 @Component({
-  templateUrl: 'app.html',
-  providers: [LocalStorageService]
+  templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -26,6 +25,7 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public menu: MenuController,
+    public events: Events,
     //public storeService :LocalStorageService
   ) {
     this.initializeApp();
@@ -47,6 +47,7 @@ export class MyApp {
       StatusBar.styleDefault();
       //this.storeService.get().then((data) => { console.log(data)});
     });
+    this.listenToLoginEvents();
   }
 
   openPage(page) {
@@ -54,5 +55,11 @@ export class MyApp {
     this.menu.close();
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
+  }
+
+  listenToLoginEvents() {
+    this.events.subscribe('user:logout', () => {
+      this.nav.push(HomePage);
+    });
   }
 }
