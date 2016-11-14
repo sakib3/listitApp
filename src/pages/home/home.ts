@@ -14,7 +14,7 @@ export class HomePage {
     this.userData.hasLoggedIn()
                 .then((isLoggedIn) => {
                   console.log(isLoggedIn);
-                  if(isLoggedIn)
+                  if(isLoggedIn.error == null)
                     this.navigateOrder();
                 }
     );
