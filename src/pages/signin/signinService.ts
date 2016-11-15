@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { WebRequest } from '../../providers/web-request';
 import { Component } from '@angular/core';
 
-@Component({
+@Injectable()({
     templateUrl: 'signin.html',
     providers: [WebRequest]
 })

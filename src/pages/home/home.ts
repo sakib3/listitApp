@@ -10,11 +10,13 @@ import { OrderPage } from '../../pages/order/order';
   providers: [UserData]
 })
 export class HomePage {
+  response: any;
   constructor(private navCtrl:Nav, private userData: UserData) {
     this.userData.hasLoggedIn()
-                .then((isLoggedIn) => {
-                  console.log(isLoggedIn);
-                  if(isLoggedIn.error == null)
+                .then((data) => {
+                  console.log(data);
+                  this.response = data;
+                  if(this.response.error == null && this.response.isLoggedIn === true)
                     this.navigateOrder();
                 }
     );

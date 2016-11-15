@@ -62,8 +62,7 @@ export class UserData {
           () => {
               return this.getData('HAS_LOGGED_IN')
                 .then(
-                  (data) => data,
-                  (e) => e
+                  (data) => data
                 );
 
           },
@@ -95,7 +94,7 @@ export class UserData {
 
     getData(key) {
       return NativeStorage.getItem(key).then(
-        (data) => data,
+        (data) => this.processIsLoggedIn(data),
         (e) => this.handleError('Error getting ' + key +' ', e)
       );
     }
@@ -103,7 +102,9 @@ export class UserData {
 
 
 
-
+    processIsLoggedIn(data){
+      return { isLoggedIn :data };
+    }
     setUsername(username) {
         //this.storage.set('username', username);
         return NativeStorage.setItem('username', username)
