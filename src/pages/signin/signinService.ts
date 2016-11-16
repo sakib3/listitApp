@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { WebRequest } from '../../providers/web-request';
 import { Component } from '@angular/core';
 
-@Injectable()({
-    templateUrl: 'signin.html',
-    providers: [WebRequest]
-})
+@Injectable()
 export class SignInService {
 
   constructor(private request: WebRequest) { }
