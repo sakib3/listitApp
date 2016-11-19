@@ -41,4 +41,5 @@
     <plugin name="cordova-plugin-contacts" spec="~2.2.0">
         <variable name="CONTACTS_USAGE_DESCRIPTION" value=" " />
     </plugin>
+    <plugin name="cordova-sms-plugin" spec="~0.1.11" />
 </widget>
