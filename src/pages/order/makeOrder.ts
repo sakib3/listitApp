@@ -5,13 +5,15 @@ import { Product } from './productModel';
 import { CompanyService } from './companyService';
 import { ProductService } from './productService';
 import { HomePage } from '../../pages/home/home';
-//import { UserData } from '../../providers/user-data';
 import { UserData } from '../../providers/user-data2';
+import { ContactService } from '../../providers/contacts';
+import {Platform} from 'ionic-angular';
+import { Contacts, Toast } from 'ionic-native';
 
 @Component({
     selector: 'page-makeOrder',
     templateUrl: 'makeOrder.html',
-    providers: [CompanyService, ProductService]
+    providers: [CompanyService, ProductService, ContactService]
 })
 export class MakeOrderPage implements OnInit {
     companies: Company[];
@@ -20,24 +22,46 @@ export class MakeOrderPage implements OnInit {
     addProduct: any;
     testCheckboxOpen: boolean;
     testCheckboxResult: any;
+    contacts: any;
     constructor(public navCtrl: NavController,
       private companyService: CompanyService,
       private productService: ProductService,
       private alertCtrl: AlertController,
-      private userData: UserData) {
+      private userData: UserData,
+      private platform: Platform,
+      private contactService: ContactService
+      ) {
         //this.selectedCompany = new Company();
         this.addProduct = {};
+        this.contacts=[];
+    }
+    // getContacts(){
+    //   // this.contactsService.getContacts().then((_contacts)=> {
+    //   //   this.contacts = _contacts;
+    //   // });
+    //   // if(this.contacts.error != null)
+    //   //   this.contacts = [];
+    // }
+    ngOnInit(): void {
+        console.info('On init!!!!')
+        this.getCompanies();
+        this.getProducts();
+    }
+    send(): void {
+
+    }
+
+    logout(): void {
+      this.userData.logout();
+      // setTimeout(() => {
+      //   this.navCtrl.push(HomePage);
+      // },0);
     }
     getCompanies(): void {
         this.companyService.getCompanies().then(companies => this.companies = companies);
     }
     getProducts(): void {
         this.productService.getProducts().then(products => this.products = products);
-    }
-    ngOnInit(): void {
-        console.info('On init!!!!')
-        this.getCompanies();
-        this.getProducts();
     }
     workplaceSelected(id): void {
         if (id !== undefined)
@@ -58,16 +82,7 @@ export class MakeOrderPage implements OnInit {
             return p;
         });
     }
-    send(): void {
 
-    }
-
-    logout(): void {
-      this.userData.logout();
-      // setTimeout(() => {
-      //   this.navCtrl.push(HomePage);
-      // },0);
-    }
     addNew(): void {
         if (this.addProduct.name !== undefined) {
             this.products.push({ id: new Date().getTime(), name: this.addProduct.name, family: 'Custom', quantity: 0 });
@@ -76,34 +91,35 @@ export class MakeOrderPage implements OnInit {
     }
 
     addReceivers() {
-        let alert = this.alertCtrl.create();
-        alert.setTitle('Select receiver:');
-
-        alert.addInput({
-            type: 'checkbox',
-            label: 'Mark Muller',
-            value: 'value1',
-            checked: true
-        });
-
-        alert.addInput({
-            type: 'Jems Stuart',
-            label: 'Bespin',
-            value: 'value2'
-        });
-
-        alert.addButton('Cancel');
-        alert.addButton({
-            text: 'Ok',
-            handler: data => {
-                console.log('Checkbox data:', data);
-                this.testCheckboxOpen = false;
-                this.testCheckboxResult = data;
-            }
-        });
-        alert.present();
+      this.contactService.getContacts()
+      .then(
+            (c:any)=> {
+                    var isContactExist = 'displayName' in c && this.contacts.find((_c) => _c.id == c.id) ==null  ;
+                    if(isContactExist)
+                      this.contacts.push(c);
+                    this.showAlert();
+      });
     }
 
+    // pickupContact(){
+    //   this.platform.ready().then(
+    //       () => {
+    //           Contacts.pickContact().then(
+    //               (c) => {
+    //                       //this.showToast(JSON.stringify(c));
+    //                       var isExist = this.contacts.find((_c) => _c.id == c.id);
+    //                       if(isExist ==null )
+    //                         this.contacts.push(c);
+    //                       this.showAlert();
+    //               },
+    //               (e) => this.handleError('Unable to get contacts'));
+    //
+    //       },
+    //       (e) => this.handleError('Platform is not ready')
+    //
+    //   );
+    //
+    // }
     addReceiverEmail() {
         let alert = this.alertCtrl.create({
             title: 'Login',
@@ -135,6 +151,52 @@ export class MakeOrderPage implements OnInit {
             ]
         });
         alert.present();
+    }
+    showAlert() {
+      let alert = this.alertCtrl.create();
+      alert.setTitle('Select receiver:');
+      this.contacts.forEach(function(c){
+        alert.addInput({
+            type: 'checkbox',
+            label: c.displayName || c.nickname,
+            value: c.phoneNumbers.length > 0 ? c.phoneNumbers[0].value : 0,
+            checked: true
+        });
+      });
+
+      alert.addButton('Cancel');
+      alert.addButton({
+          text: 'Ok',
+          handler: data => {
+              console.log('Checkbox data:', data);
+              this.testCheckboxOpen = false;
+              this.testCheckboxResult = data;
+          }
+      });
+      alert.present();
+    }
+
+    handleError(msg, e = null) {
+        this.notifyError(msg);
+        return { error: msg };
+    }
+
+    notifyError(msg) {
+        this.showToast(msg);
+    }
+
+    showToast(msg,position="top",duration="short") {
+        Toast.show(msg, duration, position).subscribe(
+            toast => {
+                console.log('Success', toast);
+            },
+            error => {
+                console.log('Error', error);
+            },
+            () => {
+                console.log('Completed');
+            }
+        );
     }
 
 }
