@@ -8,13 +8,14 @@ import { HomePage } from '../../pages/home/home';
 import { UserData } from '../../providers/user-data2';
 import { ContactService } from '../../providers/contacts';
 import { ToastService } from '../../providers/toast-service';
+import { SmsService } from '../../providers/sms-service';
 import {Platform} from 'ionic-angular';
-import { Contacts, Toast } from 'ionic-native';
+import { Contacts } from 'ionic-native';
 
 @Component({
     selector: 'page-makeOrder',
     templateUrl: 'makeOrder.html',
-    providers: [CompanyService, ProductService, ContactService, ToastService]
+    providers: [CompanyService, ProductService, ContactService, ToastService, SmsService]
 })
 export class MakeOrderPage implements OnInit {
     companies: Company[];
@@ -26,17 +27,18 @@ export class MakeOrderPage implements OnInit {
     contacts: any;
     receiverEmail: string;
     constructor(public navCtrl: NavController,
-      private companyService: CompanyService,
-      private productService: ProductService,
-      private alertCtrl: AlertController,
-      private userData: UserData,
-      private platform: Platform,
-      private contactService: ContactService,
-      private toastService: ToastService,
-      ) {
+        private companyService: CompanyService,
+        private productService: ProductService,
+        private alertCtrl: AlertController,
+        private userData: UserData,
+        private platform: Platform,
+        private contactService: ContactService,
+        private toastService: ToastService,
+        private smsService: SmsService,
+    ) {
         //this.selectedCompany = new Company();
         this.addProduct = {};
-        this.contacts=[];
+        this.contacts = [];
         this.receiverEmail = null;
     }
     // getContacts(){
@@ -51,15 +53,31 @@ export class MakeOrderPage implements OnInit {
         this.getCompanies();
         this.getProducts();
     }
+
     send(): void {
+        let products = this.productsToOrder();
+        if (products.length == 0)
+          return;
+        this.smsService.sendToMany(this.contacts, this.generateOrderView(products));
 
     }
 
+    generateOrderView(products: any) {
+        let view = "";
+        products.forEach((product) => {
+            view = view + product.name + " " + product.quantity + " Pcs . ";
+        });
+        return view;
+    }
+    productsToOrder() {
+        return this.products.filter((product) => product.quantity > 0);
+    }
+
     logout(): void {
-      this.userData.logout();
-      // setTimeout(() => {
-      //   this.navCtrl.push(HomePage);
-      // },0);
+        this.userData.logout();
+        // setTimeout(() => {
+        //   this.navCtrl.push(HomePage);
+        // },0);
     }
     getCompanies(): void {
         this.companyService.getCompanies().then(companies => this.companies = companies);
@@ -69,7 +87,7 @@ export class MakeOrderPage implements OnInit {
     }
     workplaceSelected(id): void {
         if (id !== undefined)
-          console.log(id);
+            console.log(id);
         //this.selectedWorkplace = this.companies.map(c => c.workplaces).map(w => w.w_id)this.companies.find(c => c.id == id);
     }
     prodQuantityInc(id): void {
@@ -95,14 +113,14 @@ export class MakeOrderPage implements OnInit {
     }
 
     addReceivers() {
-      this.contactService.getContacts()
-      .then(
-            (c:any)=> {
-                    var isContactExist = 'displayName' in c && this.contacts.find((_c) => _c.id == c.id) ==null;
-                    if(isContactExist)
-                      this.contacts.push(c);
-                    this.showAlert();
-      });
+        this.contactService.getContacts()
+            .then(
+            (c: any) => {
+                var isContactExist = 'displayName' in c && this.contacts.find((_c) => _c.id == c.id) == null;
+                if (isContactExist)
+                    this.contacts.push(c);
+                this.showAlert();
+            });
     }
 
     // pickupContact(){
@@ -144,7 +162,7 @@ export class MakeOrderPage implements OnInit {
                 {
                     text: 'Ok',
                     handler: data => {
-                      this.receiverEmail = this.isValidateEmail(data.receiverEmail) ? data.receiverEmail :null;
+                        this.receiverEmail = this.isValidateEmail(data.receiverEmail) ? data.receiverEmail : null;
                     }
                 }
             ]
@@ -152,33 +170,32 @@ export class MakeOrderPage implements OnInit {
         alert.present();
     }
 
-    isValidateEmail(email)
-    {
+    isValidateEmail(email) {
         let re = /\S+@\S+\.\S+/;
         return re.test(email);
     }
     showAlert() {
-      let alert = this.alertCtrl.create();
-      alert.setTitle('Select receiver:');
-      this.contacts.forEach(function(c){
-        alert.addInput({
-            type: 'checkbox',
-            label: c.displayName || c.nickname,
-            value: c.phoneNumbers.length > 0 ? c.phoneNumbers[0].value : 0,
-            checked: true
+        let alert = this.alertCtrl.create();
+        alert.setTitle('Select receiver:');
+        this.contacts.forEach(function(c) {
+            alert.addInput({
+                type: 'checkbox',
+                label: c.displayName || c.nickname,
+                value: c.phoneNumbers.length > 0 ? c.phoneNumbers[0].value : 0,
+                checked: true
+            });
         });
-      });
 
-      alert.addButton('Cancel');
-      alert.addButton({
-          text: 'Ok',
-          handler: data => {
-              console.log('Checkbox data:', data);
-              this.testCheckboxOpen = false;
-              this.testCheckboxResult = data;
-          }
-      });
-      alert.present();
+        alert.addButton('Cancel');
+        alert.addButton({
+            text: 'Ok',
+            handler: data => {
+                console.log('Checkbox data:', data);
+                this.testCheckboxOpen = false;
+                this.testCheckboxResult = data;
+            }
+        });
+        alert.present();
     }
 
     handleError(msg, e = null) {

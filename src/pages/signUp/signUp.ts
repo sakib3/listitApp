@@ -20,7 +20,6 @@ export class SignUpPage {
     ) { }
 
     onSignUp(form) {
-
         if (this.isValidFormData(form)) {
             this.listitService.getTokenForSignUp(this.getFormSubmissionData())
                 .then(
