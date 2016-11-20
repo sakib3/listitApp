@@ -5,23 +5,24 @@ import { OrderPage } from '../../pages/order/order';
 import { ForgotPasswordPage } from '../../pages/forgotPassword/forgotPassword';
 import {IonicApp, Nav} from 'ionic-angular';
 import { UserData } from '../../providers/user-data2';
-import { SignInService } from './signinService';
+import { ListItService } from '../../providers/listit-service';
+//import { SignInService } from './signinService';
 import {Platform} from 'ionic-angular';
 import { HomePage } from '../../pages/home/home';
 @Component({
     templateUrl: 'signin.html',
-    providers: [UserData, SignInService]
+    providers: [UserData, ListItService]
 })
 export class SignInPage {
     signin: { username?: string, password?: string } = {};
     submitted = false;
     response: any;
-    constructor(public navCtrl: Nav, private userData: UserData, private signInData: SignInService, private platform: Platform) { }
+    constructor(public navCtrl: Nav, private userData: UserData, private listitService: ListItService, private platform: Platform) { }
 
     onSignIn(form) {
         this.submitted = true;
         if (form.valid) {
-            this.signInData.getToken(this.getFormSubmissionData())
+            this.listitService.getTokenForSignIn(this.getFormSubmissionData())
                 .then(
                 (data) => {
                     this.response = data;
