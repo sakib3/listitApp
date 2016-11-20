@@ -7,13 +7,14 @@ import { ProductService } from './productService';
 import { HomePage } from '../../pages/home/home';
 import { UserData } from '../../providers/user-data2';
 import { ContactService } from '../../providers/contacts';
+import { ToastService } from '../../providers/toast-service';
 import {Platform} from 'ionic-angular';
 import { Contacts, Toast } from 'ionic-native';
 
 @Component({
     selector: 'page-makeOrder',
     templateUrl: 'makeOrder.html',
-    providers: [CompanyService, ProductService, ContactService]
+    providers: [CompanyService, ProductService, ContactService, ToastService]
 })
 export class MakeOrderPage implements OnInit {
     companies: Company[];
@@ -23,17 +24,20 @@ export class MakeOrderPage implements OnInit {
     testCheckboxOpen: boolean;
     testCheckboxResult: any;
     contacts: any;
+    receiverEmail: string;
     constructor(public navCtrl: NavController,
       private companyService: CompanyService,
       private productService: ProductService,
       private alertCtrl: AlertController,
       private userData: UserData,
       private platform: Platform,
-      private contactService: ContactService
+      private contactService: ContactService,
+      private toastService: ToastService,
       ) {
         //this.selectedCompany = new Company();
         this.addProduct = {};
         this.contacts=[];
+        this.receiverEmail = null;
     }
     // getContacts(){
     //   // this.contactsService.getContacts().then((_contacts)=> {
@@ -94,7 +98,7 @@ export class MakeOrderPage implements OnInit {
       this.contactService.getContacts()
       .then(
             (c:any)=> {
-                    var isContactExist = 'displayName' in c && this.contacts.find((_c) => _c.id == c.id) ==null  ;
+                    var isContactExist = 'displayName' in c && this.contacts.find((_c) => _c.id == c.id) ==null;
                     if(isContactExist)
                       this.contacts.push(c);
                     this.showAlert();
@@ -122,7 +126,7 @@ export class MakeOrderPage implements OnInit {
     // }
     addReceiverEmail() {
         let alert = this.alertCtrl.create({
-            title: 'Login',
+            title: 'Receiver Email',
             inputs: [
                 {
                     name: 'receiverEmail',
@@ -140,17 +144,18 @@ export class MakeOrderPage implements OnInit {
                 {
                     text: 'Ok',
                     handler: data => {
-                        // if (User.isValid(data.username, data.password)) {
-                        //   // logged in!
-                        // } else {
-                        //   // invalid login
-                        //   return false;
-                        // }
+                      this.receiverEmail = this.isValidateEmail(data.receiverEmail) ? data.receiverEmail :null;
                     }
                 }
             ]
         });
         alert.present();
+    }
+
+    isValidateEmail(email)
+    {
+        let re = /\S+@\S+\.\S+/;
+        return re.test(email);
     }
     showAlert() {
       let alert = this.alertCtrl.create();
@@ -182,21 +187,21 @@ export class MakeOrderPage implements OnInit {
     }
 
     notifyError(msg) {
-        this.showToast(msg);
+        this.toastService.showToast(msg);
     }
 
-    showToast(msg,position="top",duration="short") {
-        Toast.show(msg, duration, position).subscribe(
-            toast => {
-                console.log('Success', toast);
-            },
-            error => {
-                console.log('Error', error);
-            },
-            () => {
-                console.log('Completed');
-            }
-        );
-    }
+    // showToast(msg,position="top",duration="short") {
+    //     Toast.show(msg, duration, position).subscribe(
+    //         toast => {
+    //             console.log('Success', toast);
+    //         },
+    //         error => {
+    //             console.log('Error', error);
+    //         },
+    //         () => {
+    //             console.log('Completed');
+    //         }
+    //     );
+    // }
 
 }
