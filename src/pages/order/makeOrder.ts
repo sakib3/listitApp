@@ -36,18 +36,11 @@ export class MakeOrderPage implements OnInit {
         private toastService: ToastService,
         private smsService: SmsService,
     ) {
-        //this.selectedCompany = new Company();
         this.addProduct = {};
         this.contacts = [];
         this.receiverEmail = null;
     }
-    // getContacts(){
-    //   // this.contactsService.getContacts().then((_contacts)=> {
-    //   //   this.contacts = _contacts;
-    //   // });
-    //   // if(this.contacts.error != null)
-    //   //   this.contacts = [];
-    // }
+
     ngOnInit(): void {
         console.info('On init!!!!')
         this.getCompanies();
@@ -58,6 +51,7 @@ export class MakeOrderPage implements OnInit {
         let products = this.productsToOrder();
         if (products.length == 0)
           return;
+        //this.toastService.showToast(JSON.stringify(this.contacts));
         this.smsService.sendToMany(this.contacts, this.generateOrderView(products));
 
     }
@@ -75,9 +69,6 @@ export class MakeOrderPage implements OnInit {
 
     logout(): void {
         this.userData.logout();
-        // setTimeout(() => {
-        //   this.navCtrl.push(HomePage);
-        // },0);
     }
     getCompanies(): void {
         this.companyService.getCompanies().then(companies => this.companies = companies);
@@ -123,25 +114,7 @@ export class MakeOrderPage implements OnInit {
             });
     }
 
-    // pickupContact(){
-    //   this.platform.ready().then(
-    //       () => {
-    //           Contacts.pickContact().then(
-    //               (c) => {
-    //                       //this.showToast(JSON.stringify(c));
-    //                       var isExist = this.contacts.find((_c) => _c.id == c.id);
-    //                       if(isExist ==null )
-    //                         this.contacts.push(c);
-    //                       this.showAlert();
-    //               },
-    //               (e) => this.handleError('Unable to get contacts'));
-    //
-    //       },
-    //       (e) => this.handleError('Platform is not ready')
-    //
-    //   );
-    //
-    // }
+
     addReceiverEmail() {
         let alert = this.alertCtrl.create({
             title: 'Receiver Email',
@@ -207,18 +180,5 @@ export class MakeOrderPage implements OnInit {
         this.toastService.showToast(msg);
     }
 
-    // showToast(msg,position="top",duration="short") {
-    //     Toast.show(msg, duration, position).subscribe(
-    //         toast => {
-    //             console.log('Success', toast);
-    //         },
-    //         error => {
-    //             console.log('Error', error);
-    //         },
-    //         () => {
-    //             console.log('Completed');
-    //         }
-    //     );
-    // }
 
 }
